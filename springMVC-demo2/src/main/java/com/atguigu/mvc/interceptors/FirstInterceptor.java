@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FirstInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("preHandle");
+        System.out.println("preHandle 1");
         return true;  //表示放行
     }
 
