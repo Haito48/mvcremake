@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 public class FirstInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("preHandle hot-fix text");
+        System.out.println("preHandle hot-fix text2");
         return true;  //表示放行
     }
 
