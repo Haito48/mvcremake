@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--Mybatis核心配置文件中的标签必须要按照指定的顺序配置
+    properties?,settings?,typeAliases?,typeHandlers?,
+    objectFactory?,objectWrapperFactory?,reflectorFactory?,
+    plugins?,environments?,databaseIdProvider?,mappers?
+    -->
+
+    <!--引入properties文件，此后就可以在当前文件中使用${key}的方式来访问value-->
+    <properties resource="jdbc.properties"/>
+
+    <settings>
+        <!--将下划线映射为驼峰，防止因数据库属性名称设置标准与实体类属性名设置标准不同而导致查询赋值失败-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+
+    <!--类型别名,在Mybatis的范围中使用别名就可以表示一个具体的类型
+        当设置了type而没有设置alias时，会有一个默认的别名，该别名为该类的类名且不区分大小写
+        -->
+    <typeAliases>
+        <!--        <typeAlias type="com.atguigu.mybatis.pojo.Emp" alias="abc"></typeAlias>-->
+        <!--        <typeAlias type="com.atguigu.mybatis.pojo.Emp"></typeAlias>-->
+        <!--通过包设置类型别名,指定包下的全部类型将全部拥有默认的别名，即别名也不区分大小写-->
+        <package name="com.atguigu.mybatis.pojo"/>
+
+    </typeAliases>
+
+    <!--设置连接数据库的环境-->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--引入映射文件-->
+    <mappers>
+        <!--        <mapper resource="mappers/UserMapper.xml"/>-->
+        <!--
+            以包的方式引入映射文件，但是必须满足两个条件
+            1.mapper接口和映射文件所在的包必须一致
+            2.mapper接口的名字和映射文件的名字必须一致
+        -->
+        <package name="com.atguigu.mybatis.mapper"/>
+    </mappers>
+</configuration>

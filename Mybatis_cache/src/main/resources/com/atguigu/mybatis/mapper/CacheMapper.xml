@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atguigu.mybatis.mapper.CacheMapper">
+    <!--
+        mapper接口和映射文件要保持两个一致：
+        1.mapper接口的全类名和映射文件的namespace一致
+        2.mapper接口中的方法的方法名要和映射文件中的sql的id保持一致
+    -->
+
+    <!--
+        二级缓存开启的条件：
+        a>在核心配置文件中，设置全局配置属性cacheEnabled="true"，默认为true，不需要设置
+        b>在映射文件中设置标签<cache/>
+        c>二级缓存必须在SqlSession关闭或提交之后有效
+        d>查询的数据所转换的实体类类型必须实现序列化的接口
+    -->
+    <!--<cache/>-->
+    <!--设置二级缓存类型-->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+    
+    <select id="getEmpById" resultType="Emp">
+        select * from t_emp where emp_id = #{empId}
+    </select>
+
+</mapper>
